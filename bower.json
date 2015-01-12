@@ -1,0 +1,16 @@
+{
+  "name": "angular-list-view",
+  "version": "0.0.0",
+  "description": "directive to switch between views",
+  "authors": [
+    "James Durham"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

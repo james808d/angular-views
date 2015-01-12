@@ -1,0 +1,42 @@
+@import "variables.less";
+@import "mixins.less";
+
+.dark-theme {
+
+	.tile-item {
+		border: 1px solid rgba(0, 0, 0, 0.5);
+		border: none;
+		background: white;
+		box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
+	}
+
+
+	.tile-item .fixed-ratio-wrapper:first-child a.fixed-ratio {
+		background: @color1;
+	}
+
+	.tile-item .fixed-ratio-wrapper:first-child img
+	{
+		opacity: 0.99;
+	}
+
+
+	.tile-item:hover .fixed-ratio-wrapper:first-child img,
+	.tile-item.selected .fixed-ratio-wrapper:first-child img
+	{
+		opacity: 0.85;
+	}
+
+	.tile-grid {
+
+		.item-list-row-header {
+			background: @color2;
+		}
+
+		.scroll-container {
+			background: @color2;
+			padding: 8px;
+		}
+
+	}
+}

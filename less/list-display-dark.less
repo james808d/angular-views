@@ -1,0 +1,44 @@
+@import "variables.less";
+@import "mixins.less";
+
+.dark-view {
+
+		.file-list-wrap {
+			background: none;
+		}
+
+		.item-list-row > div,
+		.item-list-row > div a {
+			color: @whiteFade;
+		}
+
+		.item-list-row.selected > div,
+		.item-list-row.selected > div a {
+			color: fade(white, 75%);
+		}
+
+		.item-list-row > div.flex-fill,
+		.item-list-row > div.flex-fill a {
+			color: white;
+		}
+
+		.item-list-row.item-list-row-header {
+			border-bottom: 1px solid @color1Dark;
+			background: @color3;
+		}
+
+		.item-list-row:hover:not(.item-list-row-header),
+		{
+			background: @accentFade;
+			text-decoration: none;
+		}
+		.simple-row.selected > div,
+		.simple-row.selected > div a {
+			color: @white;
+		}
+		.media-content .item-list-row {
+			border-bottom: 1px solid rgba(0,0,0,0.2);
+		}
+
+
+}

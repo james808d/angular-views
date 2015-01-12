@@ -1,0 +1,97 @@
+<div class="tile-item-shell">
+
+	<!-- VIDEO -->
+	<div class="tile-item" ng-if="options.dataType != 'collection'"
+	     ng-class="{selected:item.selected}">
+
+		<div class="tile-background">
+			<div class="fixed-ratio-wrapper">
+				<a ui-sref="root.media.video({id: item._id})" class="fixed-ratio group">
+					<img ng-src="{{item.thumbnailUri}}">
+				</a>
+			</div>
+
+
+			<a class="category-overlay" ng-show="item.category"
+			   ui-sref="root.media.category({category: item.category})">
+				{{ item.category }}
+			</a>
+
+			<div class="video-duration-overlay">{{item.duration }}</div>
+			<div class="tile-title">
+				<h3><a ui-sref="root.media.video({id: item._id})">{{item.name}}</a></h3>
+			</div>
+			<div class="tile-footer">
+				<span class="pull-left">
+					<a>{{ item.uploader_name }}</a>
+			   </span>
+				<span class="pull-right">{{item.date_created | date:'mediumDate'}}</span>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- COLLECTION -->
+	<div class="tile-item" ng-if="options.dataType === 'collection' && !category8up">
+		<div class="fixed-ratio-wrapper">
+			<a class="fixed-ratio group">
+				<img
+						ng-src="{{item.thumbnailUri ||  item.videos[1].thumbnailUri }}">
+			</a>
+		</div>
+
+		<div class="fixed-ratio-wrapper">
+			<div class="info-container fixed-ratio group">
+				<a class="category">
+					{{ item.name }}
+				</a>
+				<h4> {{ item.video_count }} Videos </h4>
+				<!-- TODO: some day it would be nice to truncate this nicely ... -->
+				<p class="pre-space">{{item.description}}</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="tile-item tile-collection-item"
+	     ng-if="options.dataType === 'collection' && category8up">
+
+		<div class="tile-preview-wrap group" ng-if="!item.thumbnailUri">
+
+
+			<div ng-repeat="item in item.videos | limitTo:8 track by $index" class="col-sm-6 tile-preview-item">
+				<div class="fixed-ratio-wrapper" ng-class="{squared:item.duration}">
+					<a class="fixed-ratio group">
+						<img ng-src="{{item.thumbnailUri}}">
+					</a>
+				</div>
+			</div>
+
+			<div class="col-sm-6 tile-preview-item  tile-preview-item-fpo"
+			     ng-repeat="fpo in [1,2,3,4]"
+			     ng-if="4 - item.videos.length > $index">
+				<div class="image-wrapper" >
+					<div class="fixed-ratio-wrapper">
+						<div class="fixed-ratio">
+							<div class="no-item"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="image-fill fixed-ratio-wrapper" ng-if="item.thumbnailUri">
+			<a class="fixed-ratio group">
+				<img ng-src="{{ item.thumbnailUri }}">
+			</a>
+		</div>
+
+		<div class="tile-collection-item-overlay" ng-click="$state.go(media.category({categoryId: item.id}))">
+			<div class="info-block">
+				<h3 class="category"> {{item.name}} </h3>
+				<br>
+				<h4> {{ item.video_count }} Videos </h4>
+			</div>
+		</div>
+	</div>
+
+</div>

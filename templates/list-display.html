@@ -1,0 +1,155 @@
+<div class="item-list" ng-class="{'item-list-tools-open':showtools}">
+
+	<!--<div class="list-tools toolbar container-fluid" ng-show="showtools">
+		<div class="toolbar-row">
+			<div style="flex:0 0 auto; margin-right: 8px;">
+				<button class="btn btn-white" ng-class="{'active':selectedItems.length}">
+					{{ selectedItems.length }} Items Selected
+				</button>
+			</div>
+			<div style="margin-right: 8px;">
+				<select placeholder="Choose Action"
+				        id="listCommands"
+				        ng-model="listCommand"
+				        ng-change="updateOptions(listCommand)"
+				        selectize>
+					<option value="addToPlaylist">Add to playlist</option>
+					<option value="delete">Delete File</option>
+					<option value="share">Share</option>
+					<option value="createPlaylist">Create Playlist</option>
+					<option value="addToLibrary">Add to Library</option>
+					<option value="addTag">Add Tag</option>
+					<option value="addCategory">Add Category</option>
+				</select>
+			</div>
+			<div ng-show="commandOption" ng-switch="commandOption">
+				<div ng-switch-when="addToPlaylist">
+					<select placeholder="Choose Playlist"
+					        id="addToPlaylist"
+					        ng-model="playlist"
+					        ng-change="addToPlaylist(playlist)"
+					        ng-options="playlist.id as playlist.name for playlist in playlists"
+					        selectize>
+					</select>
+				</div>
+			</div>
+			<div class="flex-fill">
+				<button class="btn btn-white" ng-class="commandSelected ? 'btn-primary' : 'btn-white'">OK</button>
+			</div>
+		</div>
+	</div>-->
+
+	<div ng-if="!viewMode.gridView" class="list-view">
+		<div class="item-list-row item-list-row-header" ng-if="!options.noHeader">
+			<div ng-repeat="header in options.displayItems" class="list-item-{{ header.field }}"
+			     ng-class="{
+			     'flex-fill': header.fill,
+			     'active': header.field === options.orderBy
+			     }">
+				{{ header.label }}
+			</div>
+		</div>
+		<div class="scroll-container">
+			<!-- if draggable -->
+			<div ng-if="!options.drag.type && !options.linkCell">
+				<div list-row options="options" ng-repeat="item in data | limitTo:100 | orderBy:listOrder track by item._id"
+				     data="item"
+				     selection-model
+				     selection-model-mode="multiple"
+				     selection-model-cleanup-strategy="deselect"
+				     selection-model-on-change="updateSelection(item)">
+				</div>
+			</div>
+
+			<div ng-if="options.drag.type === 'draggable' && !options.linkCell">
+				<div list-row options="options" ng-repeat="item in data | limitTo:100 | orderBy:listOrder track by item._id"
+				     data="item"
+				     draggable="true"
+				     effect-allowed="copy"
+				     draggable-data="item"
+				     draggable-type="{{ options.drag.item_type }}"
+
+
+				     selection-model
+				     selection-model-mode="multiple"
+				     selection-model-cleanup-strategy="deselect"
+					 selection-model-on-change="updateSelection(item)">
+				</div>
+			</div>
+
+			<div ng-if="options.drag.type === 'target' && !options.linkCell">
+				<div list-row options="options" ng-repeat="item in data | limitTo:100 | orderBy:listOrder track by item._id"
+				     data="item"
+
+				     drop="options.drag.drop($data, $event, item)"
+				     drop-accept="'json/{{ options.drag.target_type }}'"
+				     drop-effect="copy"
+				     drag-over="options.dragover($event)"
+
+				     selection-model
+				     selection-model-mode="multiple"
+				     selection-model-cleanup-strategy="deselect"
+				     selection-model-on-change="updateSelection(item)">
+				</div>
+			</div>
+
+			<!-- if link list -->
+			<div ng-if="!options.drag.type && options.linkCell">
+				<div list-row options="options" ng-repeat="item in data | limitTo:100 | orderBy:listOrder track by item._id"
+				     data="item"
+				     ng-click="goto(item)"
+				     selection-model
+				     selection-model-mode="multiple"
+				     selection-model-cleanup-strategy="deselect"
+				     selection-model-on-change="updateSelection(item)">
+				</div>
+			</div>
+			<div ng-if="options.drag.type === 'target' && options.linkCell">
+				<div list-row options="options" ng-repeat="item in data | limitTo:100 | orderBy:listOrder track by item._id"
+				     data="item"
+				     ng-click="goto(item)"
+				     drop="options.drag.drop($data, $event, item)"
+				     drop-accept="'json/{{ options.drag.target_type }}'"
+				     drop-effect="copy"
+				     drag-over="options.dragover($event)"
+
+				     selection-model
+				     selection-model-mode="multiple"
+				     selection-model-cleanup-strategy="deselect"
+				     selection-model-on-change="updateSelection(item)">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="viewMode.gridView" class="row tile-grid">
+
+		<div class="item-list-row item-list-row-header" ng-if="!options.noHeader">
+			<div ng-repeat="header in options.displayItems" class="{{ header.field }}">
+				{{ header.label }}
+			</div>
+		</div>
+		<div class="scroll-container">
+			<div ng-if="!options.drag.type"
+				 grid-item options="options" ng-repeat="item in data | limitTo:100 | orderBy:listOrder track by item._id"
+			     data="item"
+			     selection-model
+			     selection-model-mode="multiple"
+			     selection-model-cleanup-strategy="deselect"
+			     selection-model-on-change="updateSelection(item)"
+			     ng-class="{selected:selected}"></div>
+			<div ng-if="options.drag.type === 'draggable'"
+			     grid-item options="options" ng-repeat="item in data | limitTo:100 | orderBy:listOrder track by item._id"
+			     data="item"
+			     draggable="true"
+			     effect-allowed="copy"
+			     draggable-data="item"
+			     draggable-type="{{ options.drag.item_type }}"
+			     selection-model
+			     selection-model-mode="multiple"
+			     selection-model-cleanup-strategy="deselect"
+			     selection-model-on-change="updateSelection(item)"
+			     ng-class="{selected:selected}"></div>
+		</div>
+	</div>
+</div>

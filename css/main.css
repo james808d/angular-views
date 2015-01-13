@@ -1,3 +1,62 @@
+.fixed-ratio-wrapper {
+  width: 100%;
+  position: relative;
+}
+.fixed-ratio {
+  position: relative;
+  height: 0;
+  padding-top: 56.26%;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+}
+/* NOTE: Firefox does not vertically center these */
+.fixed-ratio > img,
+.fixed-ratio > .item,
+.fixed-ratio > .fixed-aspect-item,
+.fixed-ratio > .vb-player {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  margin: auto;
+}
+.tile-item .fixed-ratio-wrapper + .fixed-ratio-wrapper:after {
+  padding-top: 56.25%;
+  display: block;
+  content: '';
+}
+.tile-item .fixed-ratio-wrapper + .fixed-ratio-wrapper .fixed-ratio {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  overflow: hidden;
+}
+.grid-item-list.fixed-ratio-wrapper:after {
+  padding-top: 56.25%;
+  /* 16:9 ratio */
+  display: block;
+  content: '';
+}
+.grid-item-list > .fixed-ratio {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* fill parent */
+  height: 100%;
+  overflow: hidden;
+  padding-top: 0;
+}
+
 .color2 {
   color: #e9e9e9;
 }
@@ -189,9 +248,6 @@
 .item-list-row {
   border: none;
 }
-/*.item-list-row.drag {
-	transform: scale(0.75);
-}*/
 .item-list-row.selected,
 .item-list-row.selected:hover {
   background: #00a0f0 !important;
@@ -212,14 +268,6 @@
 .item-list-row.selected > div.flex-fill a {
   color: white;
 }
-/*.media-content .item-list-row {
-	margin-left: -@typeUnit2x;
-	margin-right: -@typeUnit2x;
-}*/
-/*.media-content .item-list-row {
-	padding-left: 4px !important;
-	margin-left: -4px;
-}*/
 .item-list.item-list-tools-open {
   margin-top: 48px;
 }

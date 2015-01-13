@@ -10,7 +10,7 @@ angular.module('listDisplay')
 		},
 		templateUrl: function(tElement, tAttrs) {
 
-			return tAttrs.templateUrl || '/angular-list-view/templates/list-display.html';
+			return tAttrs.templateUrl || '/bower_components/angular-list-view/templates/list-display.html';
 		},
 		replace: true,
 		controller: function($scope, $attrs, $state, viewMode){
@@ -51,7 +51,7 @@ angular.module('listDisplay')
 		replace:true,
 		templateUrl: function(tElement, tAttrs) {
 
-			return tAttrs.templateUrl || '/angular-list-view/templates/list-row.html';
+			return tAttrs.templateUrl || '/bower_components/angular-list-view/templates/list-row.html';
 		},
 		link: function($scope, element, attrs) {
 			$scope.item = $scope.data;
@@ -71,7 +71,7 @@ angular.module('listDisplay')
 		},
 		replace:true,
 		templateUrl: function(tElement, tAttrs) {
-			return tAttrs.templateUrl || '/angular-list-view/templates/tile.html';
+			return tAttrs.templateUrl || '/bower_components/angular-list-view/templates/tile.html';
 		},
 		link: function($scope, element, attrs) {
 			$scope.item = $scope.data;

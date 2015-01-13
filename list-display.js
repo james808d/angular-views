@@ -15,17 +15,7 @@ angular.module('listDisplay')
 		replace: true,
 		controller: function($scope, $attrs, $state, viewMode){
 
-			if($scope.options.fixView) {
-				$scope.viewMode = {};
-				if ($scope.options.fixView === 'grid') {
-					$scope.viewMode.gridView = true;
-				} else {
-					$scope.viewMode.gridView = false;
-				}
-
-			} else {
-				$scope.viewMode = viewMode;
-			}
+			$scope.viewMode = viewMode;
 
 			if($scope.options.orderBy){
 				$scope.listOrder = $scope.options.orderBy;
@@ -50,13 +40,11 @@ angular.module('listDisplay')
 		},
 		replace:true,
 		templateUrl: function(tElement, tAttrs) {
-
 			return tAttrs.templateUrl || '/bower_components/angular-list-view/templates/list-row.html';
 		},
 		link: function($scope, element, attrs) {
 			$scope.item = $scope.data;
 		}
-
 	};
 
 }])
@@ -76,7 +64,6 @@ angular.module('listDisplay')
 		link: function($scope, element, attrs) {
 			$scope.item = $scope.data;
 		}
-
 	};
 
 }]);

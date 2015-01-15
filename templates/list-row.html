@@ -1,5 +1,5 @@
 <div class="item-list-row" ng-class="{selected:item.selected}">
-	<div ng-repeat="obj in options.displayItems" class="list-item-{{::obj.field }}"
+	<div ng-repeat="obj in ::options.displayItems" class="list-item-{{::obj.field }}"
 	     ng-class="{'flex-fill': obj.fill}" ng-switch on="obj.type">
 
 		<!-- VIDEO -->
@@ -68,8 +68,8 @@
 		<!-- USER -->
 		<div ng-switch-when="user-avatar" class="avatar-cell">
 			<div class="avatar">
-				<img ng-src="uploads/{{::item.avatar }}" class="img-responsive" ng-show="item.avatar">
-				<span class="glyphicons user" ng-hide="item.avatar"></span>
+				<img ng-src="uploads/{{::item.avatar }}" class="img-responsive" ng-show="::item.avatar">
+				<span class="glyphicons user" ng-hide="::item.avatar"></span>
 			</div>
 		</div>
 
@@ -78,7 +78,7 @@
 		</div>
 		<div ng-switch-when="array-length-badge">
 			<span class="no-text-overflow">
-				<span class="badge" ng-if="item[obj.field].length > 0">{{::item[obj.field].length }}</span>
+				<span class="badge" ng-if="::item[obj.field].length > 0">{{::item[obj.field].length }}</span>
 			</span>
 		</div>
 
@@ -87,7 +87,7 @@
 				Tools
 			</button>
 			<div class="dropdown-menu list-group">
-				<a class="list-group-item" ng-repeat="command in obj.actions"  ng-click="command.callback(item)">{{::command.label }}</a>
+				<a class="list-group-item" ng-repeat="command in ::obj.actions"  ng-click="command.callback(item)">{{::command.label }}</a>
 			</div>
 		</div>
 

@@ -1,5 +1,5 @@
 <div class="item-list-row" ng-class="{selected:item.selected}">
-	<div ng-repeat="obj in options.displayItems" class="list-item-{{ obj.field }}"
+	<div ng-repeat="obj in options.displayItems" class="list-item-{{::obj.field }}"
 	     ng-class="{'flex-fill': obj.fill}" ng-switch on="obj.type">
 
 		<!-- VIDEO -->
@@ -7,9 +7,9 @@
 			<div class="item-icon">
 				<a class="image-wrapper" ui-sref="root.media.video({id:item._id})">
 					<span ng-hide="item.isActive" class="glyphicons circle_minus video-inactive" ></span>
-					<img ng-src="{{ item.thumbnailUri }}">
+					<img ng-src="{{::item.thumbnailUri }}">
 
-					<div class="list-no-thumbnail" ng-hide="item.status === 'Ready'">
+					<!--<div class="list-no-thumbnail" ng-hide="item.status === 'Ready'">
 						<span ng-show="isUploading(item)" class="glyphicons upload animate-pulsate video-uploading"></span>
 						<span ng-show="processingFailed(item)"
 					      class="glyphicons circle_exclamation_mark video-error" ></span>
@@ -27,19 +27,19 @@
 								</g>
 							</svg>
 						</div>
-					</div>
+					</div>-->
 				</a>
 			</div>
-			<span class="no-text-overflow">{{ item[obj.field] }}</span>
+			<span class="no-text-overflow">{{::item[obj.field] }}</span>
 		</div>
 
 		<!-- PLAYLIST -->
-		<div ng-switch-when="playlist-thumbnail" class="preview-cell">
+		<!--<div ng-switch-when="playlist-thumbnail" class="preview-cell">
 			<div class="item-icon">
 				<a class="image-wrapper"
 				   ui-sref="root.media.playlist.video({id:options.itemLink.playlistId,videoId:item._id})">
 					<span ng-hide="item.isActive" class="glyphicons circle_minus video-inactive" ></span>
-					<img ng-src="{{ item.thumbnailUri }}">
+					<img ng-src="{{::item.thumbnailUri }}">
 
 					<div class="list-no-thumbnail" ng-hide="item.status === 'Ready'">
 						<span ng-show="isUploading(item)" class="glyphicons upload animate-pulsate video-uploading"></span>
@@ -62,27 +62,37 @@
 					</div>
 				</a>
 			</div>
-			<span class="no-text-overflow">{{ item[obj.field] }}</span>
-		</div>
+			<span class="no-text-overflow">{{::item[obj.field] }}</span>
+		</div>-->
 
 		<!-- USER -->
 		<div ng-switch-when="user-avatar" class="avatar-cell">
 			<div class="avatar">
-				<img ng-src="uploads/{{ item.avatar }}" class="img-responsive" ng-show="item.avatar">
+				<img ng-src="uploads/{{::item.avatar }}" class="img-responsive" ng-show="item.avatar">
 				<span class="glyphicons user" ng-hide="item.avatar"></span>
 			</div>
 		</div>
 
 		<div ng-switch-when="array-length">
-			<span class="no-text-overflow">{{ item[obj.field].length }}</span>
+			<span class="no-text-overflow">{{::item[obj.field].length }}</span>
 		</div>
 		<div ng-switch-when="array-length-badge">
 			<span class="no-text-overflow">
-				<span class="badge" ng-if="item[obj.field].length > 0">{{ item[obj.field].length }}</span>
+				<span class="badge" ng-if="item[obj.field].length > 0">{{::item[obj.field].length }}</span>
 			</span>
 		</div>
+
+		<div ng-switch-when="tools" class="dropdown" dropdown>
+			<button class="btn dropdown-toggle" selection-model-ignore dropdown-toggle="">
+				Tools
+			</button>
+			<div class="dropdown-menu list-group">
+				<a class="list-group-item" ng-repeat="command in obj.actions"  ng-click="command.callback(item)">{{::command.label }}</a>
+			</div>
+		</div>
+
 		<div ng-switch-default>
-			<span class="no-text-overflow">{{ item[obj.field] }}</span>
+			<span class="no-text-overflow">{{::item[obj.field] }}</span>
 		</div>
 	</div>
 </div>

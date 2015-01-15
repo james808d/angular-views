@@ -13,6 +13,14 @@ angular.module('listDisplay')
 			return tAttrs.templateUrl || '/bower_components/angular-list-view/templates/list-display.html';
 		},
 		replace: true,
+		link: function($scope, element, $attrs) {
+			$attrs.$observe('data', function observeFunction() {
+				console.log('observed change');
+			});
+			$attrs.$observe('options', function observeFunction() {
+				console.log('observed change');
+			})
+		},
 		controller: function($scope, $attrs, $state, viewMode){
 
 			$scope.viewMode = viewMode;
@@ -38,7 +46,8 @@ angular.module('listDisplay')
 			data: '=data',
 			options: '=options'
 		},
-		replace:true,
+
+
 		templateUrl: function(tElement, tAttrs) {
 			return tAttrs.templateUrl || '/bower_components/angular-list-view/templates/list-row.html';
 		},
@@ -57,7 +66,7 @@ angular.module('listDisplay')
 			options: '=options',
 			templateUrl: '=templateUrl'
 		},
-		replace:true,
+
 		templateUrl: function(tElement, tAttrs) {
 			return tAttrs.templateUrl || '/bower_components/angular-list-view/templates/tile.html';
 		},

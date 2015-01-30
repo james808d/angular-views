@@ -40,7 +40,6 @@ angular.module('listDisplay')
 			options: '=options'
 		},
 
-
 		templateUrl: function(tElement, tAttrs) {
 			return tAttrs.templateUrl || '/bower_components/angular-list-view/templates/list-row.html';
 		},

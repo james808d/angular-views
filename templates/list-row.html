@@ -1,5 +1,5 @@
 <div class="item-list-row" ng-class="{selected:item.selected}">
-	<div ng-repeat="obj in ::options.displayItems" class="list-item-{{::obj.field }}"
+	<div ng-repeat="obj in ::options.displayItems track by obj.id" class="list-item-{{::obj.field }}"
 	     ng-class="{'flex-fill': obj.fill}" ng-switch on="obj.type">
 
 		<!-- VIDEO -->
